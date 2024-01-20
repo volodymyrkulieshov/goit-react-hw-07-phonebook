@@ -14,19 +14,3 @@ const filterSlice = createSlice({
 
 export const { changeFilter } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;
-// -----------------------------------------
-// const { createSlice } = '@reduxjs/toolkit';
-
-// const initialFilterState = '';
-// const filterSlice = createSlice({
-//   name: 'filter',
-//   initialFilterState,
-//   reducers: {
-//     changeFilter(state, action) {
-//       console.log(action.payload);
-//       return (state = action.payload);
-//     },
-//   },
-// });
-// export const filterReducer = filterSlice.reducer;
-// export const { changeFilter } = filterSlice.action;
