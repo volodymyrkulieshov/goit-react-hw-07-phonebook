@@ -1,12 +1,25 @@
-export const getContacts = state => state.contacts.items;
-export const getFilter = state => state.filter;
+export const selectAllContacts = state => state.contacts;
+export const selectIsLoading = state => state.contacts.isLoading;
+export const selectError = state => state.contacts.error;
 
-export const getFilteredContacts = state => {
-  const contacts = getContacts(state);
-  const filter = getFilter(state);
-  const normalizedFilter = filter.toLowerCase();
+export const selectFilter = state => state.filter;
 
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
+export const selectFilteredContacts = state => {
+  const { contacts } = selectAllContacts(state);
+  const filter = selectFilter(state);
+  if (!filter) {
+    return contacts;
+  } else {
+    const normalizedFilter = filter.toLowerCase();
+    const filteredContacts = contacts.filter(
+      ({ name, number }) =>
+        name.toLowerCase().trim().includes(normalizedFilter) ||
+        number.trim().includes(normalizedFilter)
+    );
+
+    if (normalizedFilter && !filteredContacts.length) {
+      alert('No contacts matching your request');
+    }
+    return filteredContacts;
+  }
 };
